@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Calculate multiples</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700,900' rel='stylesheet' type='text/css'>
+    <link href="css/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>Find the sum of all the multiples</h1>
+    <div id="form">
+      <fieldset>
+        <label for="multiples">Multiples:</label>
+        <input name="multiples" id="multiples" type="input" placeholder="eg. 3, 5" />
+      </fieldset>
+      <fieldset>
+        <label for="maxValue">Maximum Value:</label>
+        <input name="maxValue" id="maxValue" type="input" placeholder="eg. 1000" />
+      </fieldset>
+      <fieldset>
+        <label for="maxValue">Answer:</label>
+        <div id="answer"></div>
+      </fieldset>
+      <fieldset>
+        <button onclick="return calculateMultiples()">Calculate!</button>
+      </fieldset>
+    </div>
+  </body>
+  <script>
+
+    /**
+     *  Gets values from input fields and executes functions to display answer
+     *  @return {value} appended to div
+     */
+    function calculateMultiples() {
+      document.getElementById("multiples").parentElement.classList.remove("error");
+      document.getElementById("maxValue").parentElement.classList.remove("error");
+
+      var multiples = document.getElementById("multiples").value;
+      var maxValue = document.getElementById("maxValue").value;
+
+      if (multiples === '' || maxValue === '' || /^(?!,)(,?[0-9]+)+$/.test(multiples) === false) {
+        if (multiples === '' || /^(?!,)(,?[0-9\s*]+)+$/.test(multiples) === false) {
+          document.getElementById("multiples").parentElement.classList.add("error");
+        }
+        if (maxValue === '') {
+          document.getElementById("maxValue").parentElement.classList.add("error");
+        }
+        return false;
+      }
+      multiples = multiples.split(','); // explode the string into an array
+      var values = addMultiples(multiples, maxValue); //run the addMultiples function
+      var div = document.getElementById("answer");
+      div.innerHTML = values;
+    }
+
+    /**
+     *  Finds the multiples of the input values and returns a sum
+     *  @param {array} multiples
+     *  @param {number} maximum value
+     *  @return {number} sum
+     */
+    function addMultiples(multiples, maxValue) {
+      var mutliplesArr = []; // declare mutliplesArr array
+      loopInts: // the first for loop is labelled "loopInts"
+      for(var i=1; i<maxValue; i++) { // loop through integers from 1 to max number
+        for(var k=0; k < multiples.length; k++) { // loop through integers that you want to find the multiples of
+          if (i % multiples[k] === 0) { // if a division remainder of 0 is returned
+            mutliplesArr.push(i); // add integer to multiplesArr array
+            continue loopInts; // breaks an interation of the "loopInts" for loop to avoid duplicate values being added
+          }
+        }
+      }
+      return mutliplesArr.reduce(add, 0);
+    }
+
+    /**
+     *  Get the sum of 2 numbers
+     *  @param {number} a
+     *  @param {number} b
+     *  @return {number} sum
+     */
+    function add(a, b) {
+        return a + b;
+    }
+  </script>
+</html>
