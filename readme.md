@@ -9,10 +9,10 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 
 1. Clone this repository
 2. Open the index.html file
-3. Enter the values to calculate the answer
+3. Enter the values to calculate the answer.
 
 ### Disclaimer
 
-This project was created to build upon the answer to Project Euler Problem 1: "Multiples of 3 and 5". 
+This project was created to build upon the answer to Project Euler Problem 1: "Multiples of 3 and 5".
 
 Before initiating this project I decided to program using only JavaScript with the exception of the interface which uses CSS and HTML.
